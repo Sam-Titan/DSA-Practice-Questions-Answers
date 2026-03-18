@@ -1,4 +1,4 @@
-def Count_Frequescies(arr, n):
+def Count_Frequencies(arr, n):
     visited = [False] * n
 
     for i in range(n):
@@ -15,4 +15,4 @@ def Count_Frequescies(arr, n):
 if __name__ == "__main__":
     arr = [10, 20, 20, 10, 10, 20, 5, 20]
     n = len(arr)
-    Count_Frequescies(arr, n)
+    Count_Frequencies(arr, n)
