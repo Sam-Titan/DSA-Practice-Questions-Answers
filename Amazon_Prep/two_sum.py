@@ -38,3 +38,12 @@ def find(nums, target):
     return [-1, -1]
 
 print(find([1,2,3,4,5], 3))
+
+def find(nums, target):
+    seen = set(nums)
+    for num in nums:
+        if num + target in seen:
+            return [num, num + target]
+    return []
+
+print(find([1,2,3,1,4,5], 3))
