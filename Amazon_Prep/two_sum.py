@@ -11,6 +11,11 @@ def find(nums, target):
 
 print(find([1,2,3,4,5], 3))
 
+# Input:  nums = [2, 7, 11, 15], target = 9
+# Output: [0, 1]   ← because nums[0] + nums[1] = 2 + 7 = 9
+
+print(find([2, 7, 11, 15], 9))
+
 # differ by k
 
 def find(nums, target):

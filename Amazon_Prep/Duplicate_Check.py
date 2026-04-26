@@ -11,6 +11,11 @@ def check(nums):
 
 print(check([1,2,3,4,5,1]))
 
+# Input:  nums = [1, 2, 3, 1]
+# Output: True
+
+print(check([1, 2, 3, 1]))
+
 def check(nums):
     seen = {}
     for num in nums:
@@ -20,3 +25,8 @@ def check(nums):
     return False
 
 print(check([1,2,3,4,5,1]))
+
+# Input:  nums = [1, 2, 3, 1]
+# Output: True
+
+print(check([1, 2, 3, 1]))
