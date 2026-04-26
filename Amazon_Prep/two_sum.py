@@ -1,0 +1,40 @@
+# Given an array, find two elements that satisfy a condition (sum to target, differ by k, etc.)
+
+def find(nums, target):
+    seen = {}
+    for i, num in enumerate(nums):
+        required = target - num
+        if required in seen:
+            return [seen[required], i]
+        seen[num] = i
+    return [-1, -1]
+
+print(find([1,2,3,4,5], 3))
+
+# differ by k
+
+def find(nums, target):
+    seen = {}
+    for i, num in enumerate(nums):
+        if num in seen:
+            return [seen[num], i]  
+        required = target + num
+        if required not in seen:
+            seen[required] = i
+    return [-1, -1]
+
+print(find([1,2,3,4,5], 3))
+
+# Better way 
+
+def find(nums, target):
+    seen = {}
+    for i, num in enumerate(nums):
+        if num - target in seen:
+            return [seen[num - target], i] 
+        if num + target in seen:
+            return [seen[num + target], i]  
+        seen[num] = i
+    return [-1, -1]
+
+print(find([1,2,3,4,5], 3))
