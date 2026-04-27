@@ -44,26 +44,73 @@
 
 # pairs([['A','B','C'],['A','B'],['C','B'],['A','B'],['A','C']])
 
+# from itertools import combinations
+
+# def pairs(nums):
+#     hash_map = {}
+
+#     # Step 1: Deduplicate within each transaction, then sort
+#     for transaction in nums:
+#         unique_items = sorted(set(transaction))
+
+#         # Step 2: Generate all valid pairs using combinations
+#         for pair in combinations(unique_items, 2):
+#             hash_map[pair] = hash_map.get(pair, 0) + 1
+
+#     # Step 3: Find max frequency
+#     maxi = max(hash_map.values())
+
+#     # Step 4: Collect all pairs with max frequency, return lexicographically smallest
+#     best = [pair for pair in hash_map if hash_map[pair] == maxi]
+
+#     return min(best)
+
+# print(pairs([['A','B','C'],['A','B'],['C','B'],['A','B'],['A','C']]))
+# Output: ('A', 'B')
+
 from itertools import combinations
 
-def pairs(nums):
-    hash_map = {}
+def pairs(pair):
+    hashmap = {}
 
-    # Step 1: Deduplicate within each transaction, then sort
-    for transaction in nums:
-        unique_items = sorted(set(transaction))
+    for num in pair:
+        my_set = set(sorted(num))
+        for item in combinations(my_set, 2):
+            hashmap[item] = hashmap.get(item, 0) + 1
 
-        # Step 2: Generate all valid pairs using combinations
-        for pair in combinations(unique_items, 2):
-            hash_map[pair] = hash_map.get(pair, 0) + 1
-
-    # Step 3: Find max frequency
-    maxi = max(hash_map.values())
-
-    # Step 4: Collect all pairs with max frequency, return lexicographically smallest
-    best = [pair for pair in hash_map if hash_map[pair] == maxi]
-
-    return min(best)
+    maxi = max(hashmap.values())
+    val = [pair for pair in hashmap if hashmap[pair] == maxi]
+    return min(val)
 
 print(pairs([['A','B','C'],['A','B'],['C','B'],['A','B'],['A','C']]))
-# Output: ('A', 'B')
+
+# Else you can do as follows
+
+from collections import defaultdict
+
+def most_common_pair(transactions):
+    freq = defaultdict(int)
+
+    for transaction in transactions:
+        items = sorted(set(transaction))  # remove duplicates + sort
+        
+        # generate all pairs
+        for i in range(len(items)):
+            for j in range(i + 1, len(items)):
+                pair = (items[i], items[j])
+                freq[pair] += 1
+
+    max_count = 0
+    result = None
+
+    for pair in freq:
+        if freq[pair] > max_count:
+            max_count = freq[pair]
+            result = pair
+        elif freq[pair] == max_count:
+            if pair < result:
+                result = pair
+
+    return result
+
+print(pairs([['A','B','C'],['A','B'],['C','B'],['A','B'],['A','C']]))
