@@ -41,38 +41,28 @@ for _ in range(n):
     panel = list(map(int, input().split()))
 
     base_case = 1
-    for i in range(length - 1):
-        if panel[i] != panel[i + 1]:
+    for i in range(1, len(panel)):
+        if panel[i] != panel[i - 1]:
             base_case += 1
 
-    if length < 3:
-        print(base_case)
-    else:
-        swaps = 0
-        blocks = []
-        for i in range(length - 2):
-            if panel[i] == panel[i + 1] and panel[i] != panel[i + 2]:
-                blocks.append([panel[i], panel[i + 1], panel[i + 2]])
-                swaps += 1
-
-        total = 0
-        for i in range(swaps):
-            competitive_case = 0
-            digits = 0
-            for j in range(length - 2):
-                if digits == length - 2:
-                    break
-                if [panel[digits], panel[digits + 1], panel[digits + 2]] == blocks[i]:
-                    digits += 2
-                    competitive_case += 2
-                elif panel[digits] != panel[digits + 1]:
-                    competitive_case += 1
-                    digits += 1
-                else:
-                    if digits == length - 2:
-                        break
-                    else:
-                        digits += 1
-                    continue
-            total = max(total, competitive_case)
-        print(max(base_case, total))
+    swaps = 0
+    blocks = []
+    left = 0
+    right = 0
+    dis = 0
+    while left <= len(panel):
+        if panel(left) == panel(right):
+            dis += 1
+            right += 1
+        elif dis > 2:
+            left += 1
+            right += 1
+        elif panel(left) != panel(right) and dis <= 1:
+            left += 1
+            right += 1
+        else:
+            swap += 1
+            blocks.append(left, right)
+            left = right
+            dis = 0
+            
